@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Overlay AI Landing",
+  "version": "1.0.0",
+  "description": "Premium landing page for Overlay AI Intelligence.",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Overlay AI"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      }
+    }
+  }
+}
