@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { 
+import {
   ArrowRight,
-  ShieldCheck, 
+  ShieldCheck,
   Zap,
   Github,
   Twitter,
@@ -17,11 +17,32 @@ import {
   PenTool,
   Search,
   Star,
-  Layers
+  Layers,
+  Coffee
 } from 'lucide-react';
 
 // Using the overlay.png provided by the user
 const LOGO_PATH = "/overlay.png";
+
+const BuyMeCoffee = () => {
+  return (
+    <a
+      href="https://www.buymeacoffee.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-8 right-8 z-[100] group flex items-center gap-3 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+    >
+      <div className="relative">
+        <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full group-hover:bg-yellow-400/40 transition-all duration-500" />
+        <Coffee size={24} className="text-yellow-400 relative z-10 animate-bounce group-hover:animate-none" />
+      </div>
+      <div className="flex flex-col">
+        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none mb-1">Support Overlay</span>
+        <span className="text-sm font-bold text-white tracking-tight">Buy me a coffee</span>
+      </div>
+    </a>
+  );
+};
 
 const StarShower = () => {
   const [stars, setStars] = useState<{ id: number; left: number; top: number; delay: number }[]>([]);
@@ -40,9 +61,9 @@ const StarShower = () => {
   };
 
   return (
-    <a 
-      href="https://github.com/Tzgold/Overlay" 
-      target="_blank" 
+    <a
+      href="https://github.com/Tzgold/Overlay"
+      target="_blank"
       rel="noopener noreferrer"
       onMouseEnter={handleMouseEnter}
       className="relative px-10 py-4 rounded-xl border border-white/15 hover:border-white/30 text-white/60 hover:text-white font-bold text-sm uppercase tracking-wider transition-all flex items-center gap-2 bg-white/5 overflow-visible group"
@@ -52,12 +73,12 @@ const StarShower = () => {
       <div className="h-4 w-[1px] bg-white/20 mx-1 group-hover:bg-white/40 transition-colors" />
       <span className="text-white/40 group-hover:text-white transition-colors">1.2k</span>
       {stars.map(star => (
-        <Star 
+        <Star
           key={star.id}
           size={12}
           className="star-particle text-yellow-400 fill-yellow-400"
-          style={{ 
-            left: `${star.left}%`, 
+          style={{
+            left: `${star.left}%`,
             top: `${star.top}%`,
             animationDelay: `${star.delay}s`
           }}
@@ -70,10 +91,10 @@ const StarShower = () => {
 const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboard }) => {
   return (
     <div className="min-h-screen bg-[#000000] text-white selection:bg-white/20 overflow-x-hidden">
-      
+
       {/* Main Frame Wrapper */}
       <div className="main-frame flex flex-col items-center relative overflow-hidden bg-black/40 border-white/10 mx-5 my-5 rounded-[40px] border min-h-[calc(100vh-40px)]">
-        
+
         {/* Navigation - Pill Design */}
         <div className="w-full pt-10 flex justify-center sticky top-0 z-50 px-6">
           <nav className="glass-surface flex items-center gap-2 p-1.5 rounded-full border border-white/15 shadow-2xl max-w-fit bg-black/60 backdrop-blur-xl text-white">
@@ -87,7 +108,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               <a href="#features" className="text-[11px] font-bold text-white/50 hover:text-white uppercase tracking-[0.2em] transition-all">Features</a>
             </div>
 
-            <button 
+            <button
               onClick={onOpenDashboard}
               className="bg-white text-black text-[11px] font-bold uppercase tracking-[0.1em] px-8 h-10 rounded-full hover:bg-zinc-200 transition-all active:scale-95"
             >
@@ -99,9 +120,9 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         {/* Hero Section */}
         <section className="relative w-full flex flex-col items-center justify-center text-center px-6 min-h-[85vh] z-10 pt-10 pb-20 overflow-hidden">
           <div className="absolute inset-0 z-0 pointer-events-none">
-            <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale contrast-[1.5] brightness-[0.4]" 
-              style={{ 
+            <div
+              className="absolute inset-0 bg-cover bg-center bg-no-repeat grayscale contrast-[1.5] brightness-[0.4]"
+              style={{
                 backgroundImage: 'url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop")',
               }}
             />
@@ -113,17 +134,17 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               <div className="w-1.5 h-1.5 bg-white/30 rounded-full" />
               Overlay Intelligence v3.0
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl mb-8 max-w-4xl mx-auto leading-[1.1] font-bold tracking-tight text-white">
               AI, right where<br />you work
             </h1>
-            
+
             <p className="text-base md:text-xl max-w-2xl mx-auto mb-12 text-white/60 font-medium leading-relaxed">
               Unleash a high-performance command center on any website — instantly, with zero context switching.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              <button 
+              <button
                 onClick={onOpenDashboard}
                 className="px-10 py-4 rounded-xl bg-white text-black font-bold text-sm uppercase tracking-wider transition-all flex items-center gap-2 group hover:scale-105 active:scale-95 shadow-xl"
               >
@@ -131,7 +152,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 Install Extension
                 <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </button>
-              
+
               <StarShower />
             </div>
           </div>
@@ -145,24 +166,24 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
-              { 
-                icon: <Download size={40} />, 
-                title: "Install Extension", 
-                desc: "Add Overlay to Chrome in one click. Experience native integration deep in the browser." 
+              {
+                icon: <Download size={40} />,
+                title: "Install Extension",
+                desc: "Add Overlay to Chrome in one click. Experience native integration deep in the browser."
               },
-              { 
-                icon: <Keyboard size={40} />, 
-                title: "Summon Instantly", 
-                desc: "Press ⌘ / Ctrl + A to open anywhere. Bring the AI dashboard into any page without leaving your flow." 
+              {
+                icon: <Keyboard size={40} />,
+                title: "Summon Instantly",
+                desc: "Press ⌘ / Ctrl + A to open anywhere. Bring the AI dashboard into any page without leaving your flow."
               },
-              { 
-                icon: <Layers size={40} />, 
-                title: "Universal Layer", 
-                desc: "Precision Intelligence. Without compromise. Use the dashboard on any page instantly." 
+              {
+                icon: <Layers size={40} />,
+                title: "Universal Layer",
+                desc: "Precision Intelligence. Without compromise. Use the dashboard on any page instantly."
               }
             ].map((step, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="p-12 rounded-[32px] bg-white/[0.03] backdrop-blur-2xl border border-white/10 flex flex-col items-center text-center gap-8 group transition-all duration-500 cursor-default hover:bg-white/15 hover:border-white/40 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(255,255,255,0.07)]"
               >
                 <div className="mb-2 transition-all duration-500 group-hover:scale-110 text-white/30 group-hover:text-white flex items-center justify-center">
@@ -188,30 +209,30 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
             {[
-              { 
-                icon: <GraduationCap size={24} />, 
-                role: "Students", 
-                text: "Summarize a PDF while reading it" 
+              {
+                icon: <GraduationCap size={24} />,
+                role: "Students",
+                text: "Summarize a PDF while reading it"
               },
-              { 
-                icon: <Code2 size={24} />, 
-                role: "Developers", 
-                text: "Explain a function without leaving GitHub" 
+              {
+                icon: <Code2 size={24} />,
+                role: "Developers",
+                text: "Explain a function without leaving GitHub"
               },
-              { 
-                icon: <PenTool size={24} />, 
-                role: "Writers", 
+              {
+                icon: <PenTool size={24} />,
+                role: "Writers",
                 text: "Draft an email reply while staying in your flow",
                 highlight: true
               },
-              { 
-                icon: <Search size={24} />, 
-                role: "Researchers", 
-                text: "Cross-reference facts while browsing live news" 
+              {
+                icon: <Search size={24} />,
+                role: "Researchers",
+                text: "Cross-reference facts while browsing live news"
               }
             ].map((useCase, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className={`p-10 rounded-[32px] bg-white/[0.03] backdrop-blur-lg border flex flex-col items-start text-left gap-10 transition-all duration-500 group hover:-translate-y-1 ${useCase.highlight ? 'border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)] bg-white/5 hover:bg-white/10' : 'border-white/15 hover:border-white/40 hover:bg-white/10'}`}
               >
                 <div className="text-white/30 group-hover:text-white group-hover:scale-110 transition-all duration-500">
@@ -252,21 +273,21 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 ))}
               </ul>
             </div>
-            
+
             <div className="border border-white/15 p-1 bg-white/5 rounded-[40px] overflow-hidden group shadow-2xl transition-all duration-700 hover:border-white/30">
-               <div className="bg-[#050505]/80 backdrop-blur-3xl p-16 h-[460px] flex flex-col items-center justify-center text-center gap-10 transition-all duration-700 border border-white/10 rounded-[38px] group-hover:bg-[#080808]">
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-white/10 blur-[100px] rounded-full transition-all duration-700 group-hover:bg-white/20" />
-                    <div className="w-32 h-32 opacity-20 group-hover:opacity-100 transition-all duration-1000 relative z-10 group-hover:scale-110 flex items-center justify-center">
-                      <img src={LOGO_PATH} alt="Overlay Logo" className="w-full h-full object-contain filter brightness-125" />
-                    </div>
+              <div className="bg-[#050505]/80 backdrop-blur-3xl p-16 h-[460px] flex flex-col items-center justify-center text-center gap-10 transition-all duration-700 border border-white/10 rounded-[38px] group-hover:bg-[#080808]">
+                <div className="relative">
+                  <div className="absolute inset-0 bg-white/10 blur-[100px] rounded-full transition-all duration-700 group-hover:bg-white/20" />
+                  <div className="w-32 h-32 opacity-20 group-hover:opacity-100 transition-all duration-1000 relative z-10 group-hover:scale-110 flex items-center justify-center">
+                    <img src={LOGO_PATH} alt="Overlay Logo" className="w-full h-full object-contain filter brightness-125" />
                   </div>
-                  <div className="space-y-4">
-                    <div className="flex flex-col gap-2">
-                      <span className="text-white font-bold text-3xl tracking-tight italic">AI, right where you work</span>
-                    </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex flex-col gap-2">
+                    <span className="text-white font-bold text-3xl tracking-tight italic">AI, right where you work</span>
                   </div>
-               </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -344,13 +365,14 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
             </div>
 
             <div className="pt-12 border-t border-white/15 flex flex-col md:flex-row justify-between items-center gap-4">
-               <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20">
+              <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-white/20">
                 © 2025 Overlay
               </p>
             </div>
           </div>
         </footer>
       </div>
+      <BuyMeCoffee />
     </div>
   );
 };
