@@ -18,6 +18,8 @@ import {
   Search,
   Star,
   Layers,
+  ShoppingBag,
+  CreditCard,
   Coffee
 } from 'lucide-react';
 
@@ -25,22 +27,108 @@ import {
 const LOGO_PATH = "/overlay.png";
 
 const BuyMeCoffee = () => {
+  const [amount, setAmount] = useState('5.00');
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  React.useEffect(() => {
+    if (!isExpanded) return;
+
+    const container = document.getElementById('paypal-button-container');
+    if (container && (window as any).paypal) {
+      container.innerHTML = '';
+      (window as any).paypal.Buttons({
+        style: {
+          layout: 'vertical',
+          color: 'gold',
+          shape: 'rect',
+          label: 'paypal'
+        },
+        createOrder: (data: any, actions: any) => {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: amount
+              }
+            }]
+          });
+        },
+        onApprove: (data: any, actions: any) => {
+          return actions.order.capture().then((details: any) => {
+            alert('Thank you for the coffee, ' + details.payer.name.given_name + '!');
+            setIsExpanded(false);
+          });
+        }
+      }).render('#paypal-button-container');
+    }
+  }, [isExpanded, amount]);
+
   return (
-    <a
-      href="https://www.buymeacoffee.com"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-8 right-8 z-[100] group flex items-center gap-3 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-    >
-      <div className="relative">
-        <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full group-hover:bg-yellow-400/40 transition-all duration-500" />
-        <Coffee size={24} className="text-yellow-400 relative z-10 animate-bounce group-hover:animate-none" />
-      </div>
-      <div className="flex flex-col">
-        <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none mb-1">Support Overlay</span>
-        <span className="text-sm font-bold text-white tracking-tight">Buy me a coffee</span>
-      </div>
-    </a>
+    <div className="fixed bottom-8 right-8 z-[100] flex flex-col items-end gap-4">
+      {isExpanded ? (
+        <div className="glass-surface p-6 rounded-3xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-[320px] animate-in fade-in zoom-in duration-300">
+          <div className="flex justify-between items-center mb-6">
+            <div className="flex items-center gap-3">
+              <div className="relative">
+                <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full" />
+                <Coffee size={24} className="text-yellow-400 relative z-10" />
+              </div>
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none mb-1">Support Overlay</span>
+                <span className="text-sm font-bold text-white tracking-tight">Buy me a coffee</span>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsExpanded(false)}
+              className="text-white/40 hover:text-white transition-colors"
+            >
+              <ArrowRight size={20} className="rotate-90" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 mb-6">
+            {['5.00', '10.00', '25.00'].map((val) => (
+              <button
+                key={val}
+                onClick={() => setAmount(val)}
+                className={`py-2 rounded-xl border text-xs font-bold transition-all ${amount === val
+                    ? 'bg-white text-black border-white'
+                    : 'bg-white/5 text-white/60 border-white/10 hover:border-white/30'
+                  }`}
+              >
+                ${val}
+              </button>
+            ))}
+          </div>
+
+          <div className="relative mb-6">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 font-bold">$</span>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-8 pr-4 text-sm font-bold text-white focus:outline-none focus:border-white/30 transition-all"
+              placeholder="Custom amount"
+            />
+          </div>
+
+          <div id="paypal-button-container" className="w-full min-h-[100px]" />
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsExpanded(true)}
+          className="group flex items-center gap-3 px-6 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 active:scale-95 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 bg-yellow-400/20 blur-xl rounded-full group-hover:bg-yellow-400/40 transition-all duration-500" />
+            <Coffee size={24} className="text-yellow-400 relative z-10 animate-bounce group-hover:animate-none" />
+          </div>
+          <div className="flex flex-col items-start">
+            <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest leading-none mb-1">Support Overlay</span>
+            <span className="text-sm font-bold text-white tracking-tight">Buy me a coffee</span>
+          </div>
+        </button>
+      )}
+    </div>
   );
 };
 
