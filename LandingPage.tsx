@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   ArrowRight,
   ShieldCheck,
@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 
 // Using the overlay.png provided by the user
+//the logo for the overlay
 const LOGO_PATH = "/overlay.png";
 
 const BuyMeCoffee = () => {
@@ -91,8 +92,8 @@ const BuyMeCoffee = () => {
                 key={val}
                 onClick={() => setAmount(val)}
                 className={`py-2 rounded-xl border text-xs font-bold transition-all ${amount === val
-                    ? 'bg-white text-black border-white'
-                    : 'bg-white/5 text-white/60 border-white/10 hover:border-white/30'
+                  ? 'bg-white text-black border-white'
+                  : 'bg-white/5 text-white/60 border-white/10 hover:border-white/30'
                   }`}
               >
                 ${val}
@@ -173,6 +174,56 @@ const StarShower = () => {
         />
       ))}
     </a>
+  );
+};
+
+const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
+  const divRef = useRef<HTMLDivElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [opacity, setOpacity] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!divRef.current) return;
+    const div = divRef.current;
+    const rect = div.getBoundingClientRect();
+    setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleFocus = () => {
+    setOpacity(1);
+  };
+
+  const handleBlur = () => {
+    setOpacity(0);
+  };
+
+  const handleMouseEnter = () => {
+    setOpacity(1);
+  };
+
+  const handleMouseLeave = () => {
+    setOpacity(0);
+  };
+
+  return (
+    <div
+      ref={divRef}
+      onMouseMove={handleMouseMove}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`relative overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05] ${className}`}
+    >
+      <div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+        style={{
+          opacity,
+          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(255,255,255,0.06), transparent 40%)`,
+        }}
+      />
+      <div className="relative h-full">{children}</div>
+    </div>
   );
 };
 
@@ -270,10 +321,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 desc: "Precision Intelligence. Without compromise. Use the dashboard on any page instantly."
               }
             ].map((step, i) => (
-              <div
-                key={i}
-                className="p-12 rounded-[32px] bg-white/[0.03] backdrop-blur-2xl border border-white/10 flex flex-col items-center text-center gap-8 group transition-all duration-500 cursor-default hover:bg-white/15 hover:border-white/40 hover:-translate-y-2 hover:shadow-[0_0_50px_rgba(255,255,255,0.07)]"
-              >
+              <SpotlightCard key={i} className="flex flex-col items-center text-center gap-8 p-12">
                 <div className="mb-2 transition-all duration-500 group-hover:scale-110 text-white/30 group-hover:text-white flex items-center justify-center">
                   {step.icon}
                 </div>
@@ -285,7 +333,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                     {step.desc}
                   </p>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </section>
@@ -319,9 +367,9 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 text: "Cross-reference facts while browsing live news"
               }
             ].map((useCase, i) => (
-              <div
+              <SpotlightCard
                 key={i}
-                className={`p-10 rounded-[32px] bg-white/[0.03] backdrop-blur-lg border flex flex-col items-start text-left gap-10 transition-all duration-500 group hover:-translate-y-1 ${useCase.highlight ? 'border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)] bg-white/5 hover:bg-white/10' : 'border-white/15 hover:border-white/40 hover:bg-white/10'}`}
+                className={`flex flex-col items-start text-left gap-10 p-10 transition-all duration-500 group hover:-translate-y-1 ${useCase.highlight ? 'border-white/30 shadow-[0_0_40px_rgba(255,255,255,0.05)] bg-white/5 hover:bg-white/10' : ''}`}
               >
                 <div className="text-white/30 group-hover:text-white group-hover:scale-110 transition-all duration-500">
                   {useCase.icon}
@@ -330,7 +378,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   <h3 className="text-2xl font-bold text-white tracking-tight">{useCase.role}</h3>
                   <p className="text-white/40 group-hover:text-white/80 text-sm font-medium leading-relaxed transition-colors duration-300">{useCase.text}</p>
                 </div>
-              </div>
+              </SpotlightCard>
             ))}
           </div>
         </section>
