@@ -135,6 +135,25 @@ const BuyMeCoffee = () => {
 
 const StarShower = () => {
   const [stars, setStars] = useState<{ id: number; left: number; top: number; delay: number }[]>([]);
+  const [starCount, setStarCount] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch('https://api.github.com/repos/Tzgold/Overlay')
+      .then(res => res.json())
+      .then(data => {
+        if (typeof data.stargazers_count === 'number') {
+          const count = data.stargazers_count;
+          if (count >= 1000) {
+            setStarCount((count / 1000).toFixed(1).replace(/\.0$/, '') + 'k');
+          } else {
+            setStarCount(String(count));
+          }
+        }
+      })
+      .catch(() => {
+        setStarCount('★');
+      });
+  }, []);
 
   const handleMouseEnter = () => {
     const newStars = Array.from({ length: 8 }).map((_, i) => ({
@@ -160,7 +179,8 @@ const StarShower = () => {
       <Github size={20} />
       <span>GitHub</span>
       <div className="h-4 w-[1px] bg-white/20 mx-1 group-hover:bg-white/40 transition-colors" />
-      <span className="text-white/40 group-hover:text-white transition-colors">1.2k</span>
+      <Star size={14} className="text-yellow-400 fill-yellow-400" />
+      <span className="text-white/40 group-hover:text-white transition-colors">{starCount ?? '·'}</span>
       {stars.map(star => (
         <Star
           key={star.id}
