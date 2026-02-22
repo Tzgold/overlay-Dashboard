@@ -254,17 +254,32 @@ const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode
       onBlur={handleBlur}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={`relative overflow-hidden rounded-[32px] backdrop-blur-2xl transition-all duration-500 ${className}`}
+      className={`relative overflow-hidden rounded-[28px] backdrop-blur-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 ${className}`}
       style={{
         border: '1px solid var(--border-subtle)',
         backgroundColor: 'var(--bg-card)',
+        boxShadow: opacity ? '0 8px 40px -12px var(--shadow-color), 0 0 0 1px var(--border-primary)' : '0 4px 20px -8px var(--shadow-color)',
+        transition: 'all 0.5s cubic-bezier(0.23, 1, 0.32, 1)',
       }}
     >
+      {/* Spotlight gradient following mouse */}
       <div
-        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
+        className="pointer-events-none absolute -inset-px rounded-[28px] transition duration-500"
         style={{
           opacity,
-          background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, var(--spotlight-color), transparent 40%)`,
+          background: `radial-gradient(500px circle at ${position.x}px ${position.y}px, var(--spotlight-color), transparent 40%)`,
+        }}
+      />
+      {/* Border glow following mouse */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-[28px] transition duration-500"
+        style={{
+          opacity: opacity * 0.6,
+          background: `radial-gradient(300px circle at ${position.x}px ${position.y}px, var(--border-primary), transparent 50%)`,
+          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          maskComposite: 'exclude',
+          WebkitMaskComposite: 'xor',
+          padding: '1px',
         }}
       />
       <div className="relative h-full">{children}</div>
@@ -273,38 +288,39 @@ const SpotlightCard = ({ children, className = "" }: { children: React.ReactNode
 };
 
 const ThemeToggle = ({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) => {
-  const [animKey, setAnimKey] = useState(0);
-
-  const handleClick = () => {
-    setAnimKey(prev => prev + 1);
-    onToggle();
-  };
-
   return (
     <button
-      onClick={handleClick}
-      className="relative w-14 h-14 rounded-full flex items-center justify-center overflow-hidden transition-all duration-500 hover:scale-110 active:scale-90 group"
+      onClick={onToggle}
+      className="relative flex items-center gap-1 rounded-full p-1 transition-all duration-500 hover:scale-105 active:scale-95"
       style={{
+        width: '64px',
+        height: '32px',
         backgroundColor: 'var(--bg-card)',
         border: '1px solid var(--border-primary)',
-        boxShadow: isDark
-          ? '0 0 20px rgba(255, 255, 255, 0.05), inset 0 0 20px rgba(255, 255, 255, 0.02)'
-          : '0 0 20px rgba(0, 0, 0, 0.05), inset 0 0 20px rgba(0, 0, 0, 0.02)',
+        boxShadow: '0 2px 10px var(--shadow-color)',
       }}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
     >
-      {/* Glow ring */}
+      {/* Icons at each end */}
+      <div className="absolute left-2 top-1/2 -translate-y-1/2 z-0 transition-opacity duration-300" style={{ opacity: isDark ? 0.3 : 1, color: 'var(--text-tertiary)' }}>
+        <Sun size={12} />
+      </div>
+      <div className="absolute right-2 top-1/2 -translate-y-1/2 z-0 transition-opacity duration-300" style={{ opacity: isDark ? 1 : 0.3, color: 'var(--text-tertiary)' }}>
+        <Moon size={12} />
+      </div>
+      {/* Sliding knob */}
       <div
-        className="absolute inset-0 rounded-full transition-all duration-700"
+        className="absolute top-1 w-6 h-6 rounded-full flex items-center justify-center z-10 transition-all duration-500"
         style={{
-          background: isDark
-            ? 'radial-gradient(circle, rgba(250, 204, 21, 0.15) 0%, transparent 70%)'
-            : 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+          left: isDark ? '4px' : '32px',
+          backgroundColor: 'var(--btn-bg)',
+          boxShadow: '0 1px 4px var(--shadow-color)',
         }}
-      />
-      <div key={animKey} className="theme-icon-enter relative z-10" style={{ color: 'var(--text-primary)' }}>
-        {isDark ? <Sun size={22} /> : <Moon size={22} />}
+      >
+        <div style={{ color: 'var(--btn-text)' }}>
+          {isDark ? <Moon size={12} /> : <Sun size={12} />}
+        </div>
       </div>
     </button>
   );
@@ -332,6 +348,11 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
 
   return (
     <div className="min-h-screen selection:bg-white/20 overflow-x-hidden" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+
+      {/* Fixed Theme Toggle - Top Right */}
+      <div className="fixed top-6 right-6 z-[90]">
+        <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
+      </div>
 
       {/* Main Frame Wrapper */}
       <div className="main-frame flex flex-col items-center relative overflow-hidden mx-5 my-5 rounded-[40px]" style={{ minHeight: 'calc(100vh - 40px)' }}>
@@ -403,89 +424,97 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           </div>
         </section>
 
-        {/* Section: How It Works */}
+        {/* Section: How It Works — Bento Grid */}
         <section id="how-it-works" className="w-full py-32 px-10 z-10 flex flex-col items-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold tracking-tight mb-4" style={{ color: 'var(--text-primary)' }}>How It Works</h2>
             <p className="text-[11px] font-bold uppercase tracking-[0.4em]" style={{ color: 'var(--text-muted)' }}>THE PATH TO FRICTIONLESS INTELLIGENCE</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                icon: <Download size={40} />,
-                title: "Install Extension",
-                desc: "Add Overlay to Chrome in one click. Experience native integration deep in the browser."
-              },
-              {
-                icon: <Keyboard size={40} />,
-                title: "Summon Instantly",
-                desc: "Press ⌘ / Ctrl + A to open anywhere. Bring the AI dashboard into any page without leaving your flow."
-              },
-              {
-                icon: <Layers size={40} />,
-                title: "Universal Layer",
-                desc: "Precision Intelligence. Without compromise. Use the dashboard on any page instantly."
-              }
-            ].map((step, i) => (
-              <SpotlightCard key={i} className="flex flex-col items-center text-center gap-8 p-12">
-                <div className="mb-2 transition-all duration-500 flex items-center justify-center" style={{ color: 'var(--text-tertiary)' }}>
-                  {step.icon}
+          <div className="max-w-6xl mx-auto flex flex-col gap-6">
+            {/* Top row: large left + small right */}
+            <div className="grid md:grid-cols-5 gap-6">
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <Download size={28} />
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold tracking-tight transition-colors duration-300" style={{ color: 'var(--text-primary)' }}>
-                    {step.title}
-                  </h3>
-                  <p className="text-[15px] leading-relaxed max-w-[260px] mx-auto transition-colors duration-300 font-medium" style={{ color: 'var(--text-tertiary)' }}>
-                    {step.desc}
-                  </p>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Install Extension</h3>
+                  <p className="text-[15px] leading-relaxed max-w-[360px] font-medium" style={{ color: 'var(--text-tertiary)' }}>Add Overlay to Chrome in one click. Experience native integration deep in the browser.</p>
                 </div>
               </SpotlightCard>
-            ))}
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <Keyboard size={28} />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Summon Instantly</h3>
+                  <p className="text-[15px] leading-relaxed font-medium" style={{ color: 'var(--text-tertiary)' }}>Press ⌘ / Ctrl + A to open anywhere. Bring the AI dashboard into any page without leaving your flow.</p>
+                </div>
+              </SpotlightCard>
+            </div>
+            {/* Bottom row: full width */}
+            <SpotlightCard className="flex flex-col md:flex-row md:items-center justify-between p-10 min-h-[200px] gap-8">
+              <div className="flex items-start gap-6">
+                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl shrink-0" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <Layers size={28} />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Universal Layer</h3>
+                  <p className="text-[15px] leading-relaxed max-w-[480px] font-medium" style={{ color: 'var(--text-tertiary)' }}>Precision Intelligence. Without compromise. Use the dashboard on any page instantly.</p>
+                </div>
+              </div>
+            </SpotlightCard>
           </div>
         </section>
 
-        {/* Section: Built for the Modern Workflow */}
+        {/* Section: Built for the Modern Workflow — Bento Grid */}
         <section id="use-cases" className="w-full py-32 px-10 z-10" style={{ backgroundColor: 'var(--bg-primary)' }}>
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Built for the Modern Workflow</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {[
-              {
-                icon: <GraduationCap size={24} />,
-                role: "Students",
-                text: "Summarize a PDF while reading it"
-              },
-              {
-                icon: <Code2 size={24} />,
-                role: "Developers",
-                text: "Explain a function without leaving GitHub"
-              },
-              {
-                icon: <PenTool size={24} />,
-                role: "Writers",
-                text: "Draft an email reply while staying in your flow",
-                highlight: true
-              },
-              {
-                icon: <Search size={24} />,
-                role: "Researchers",
-                text: "Cross-reference facts while browsing live news"
-              }
-            ].map((useCase, i) => (
-              <SpotlightCard
-                key={i}
-                className={`flex flex-col items-start text-left gap-10 p-10 transition-all duration-500 group hover:-translate-y-1 ${useCase.highlight ? 'shadow-lg' : ''}`}
-              >
-                <div className="transition-all duration-500" style={{ color: 'var(--text-tertiary)' }}>
-                  {useCase.icon}
+          <div className="max-w-6xl mx-auto flex flex-col gap-6">
+            {/* Top row: large left + small right */}
+            <div className="grid md:grid-cols-5 gap-6">
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
+                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <GraduationCap size={24} />
                 </div>
-                <div className="space-y-4">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>{useCase.role}</h3>
-                  <p className="text-sm font-medium leading-relaxed transition-colors duration-300" style={{ color: 'var(--text-tertiary)' }}>{useCase.text}</p>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Students</h3>
+                  <p className="text-sm font-medium leading-relaxed max-w-[360px]" style={{ color: 'var(--text-tertiary)' }}>Summarize a PDF while reading it</p>
                 </div>
               </SpotlightCard>
-            ))}
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
+                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <Code2 size={24} />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Developers</h3>
+                  <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>Explain a function without leaving GitHub</p>
+                </div>
+              </SpotlightCard>
+            </div>
+            {/* Bottom row: small left + large right */}
+            <div className="grid md:grid-cols-5 gap-6">
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
+                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <PenTool size={24} />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Writers</h3>
+                  <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>Draft an email reply while staying in your flow</p>
+                </div>
+              </SpotlightCard>
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
+                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                  <Search size={24} />
+                </div>
+                <div className="space-y-3">
+                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Researchers</h3>
+                  <p className="text-sm font-medium leading-relaxed max-w-[360px]" style={{ color: 'var(--text-tertiary)' }}>Cross-reference facts while browsing live news</p>
+                </div>
+              </SpotlightCard>
+            </div>
           </div>
         </section>
 
@@ -610,12 +639,6 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               <p className="text-[10px] font-bold uppercase tracking-[0.4em]" style={{ color: 'var(--text-muted)' }}>
                 © 2025 Overlay
               </p>
-              <div className="flex items-center gap-4">
-                <span className="text-[10px] font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-muted)' }}>
-                  {isDark ? 'Dark' : 'Light'} Mode
-                </span>
-                <ThemeToggle isDark={isDark} onToggle={toggleTheme} />
-              </div>
             </div>
           </div>
         </footer>
