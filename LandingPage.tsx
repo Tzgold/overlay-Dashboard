@@ -400,11 +400,11 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               Overlay Intelligence v3.0
             </div>
 
-            <h1 className="text-5xl md:text-7xl mb-8 max-w-4xl mx-auto leading-[1.1] font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>
+            <h1 className="text-5xl md:text-7xl mb-8 max-w-4xl mx-auto leading-[1.1] font-bold tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
               AI, right where<br />you work
             </h1>
 
-            <p className="text-base md:text-xl max-w-2xl mx-auto mb-12 font-medium leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            <p className="text-base md:text-xl max-w-2xl mx-auto mb-12 font-normal leading-relaxed" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
               Unleash a high-performance command center on any website — instantly, with zero context switching.
             </p>
 
@@ -427,8 +427,8 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         {/* Section: How It Works — Bento Grid */}
         <section id="how-it-works" className="w-full py-32 px-10 z-10 flex flex-col items-center" style={{ backgroundColor: 'var(--bg-primary)' }}>
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold tracking-tight mb-4" style={{ color: 'var(--text-primary)' }}>How It Works</h2>
-            <p className="text-[11px] font-bold uppercase tracking-[0.4em]" style={{ color: 'var(--text-muted)' }}>THE PATH TO FRICTIONLESS INTELLIGENCE</p>
+            <span className="section-label">The Path to Frictionless Intelligence</span>
+            <h2 className="text-5xl font-bold tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>How It Works</h2>
           </div>
           <div className="max-w-6xl mx-auto flex flex-col gap-6">
             {/* Top row: large left + small right */}
@@ -470,7 +470,8 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         {/* Section: Built for the Modern Workflow — Bento Grid */}
         <section id="use-cases" className="w-full py-32 px-10 z-10" style={{ backgroundColor: 'var(--bg-primary)' }}>
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Built for the Modern Workflow</h2>
+            <span className="section-label">Use Cases</span>
+            <h2 className="text-5xl font-bold tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>Built for the Modern Workflow</h2>
           </div>
           <div className="max-w-6xl mx-auto flex flex-col gap-6">
             {/* Top row: large left + small right */}
@@ -522,8 +523,8 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         <section id="features" className="w-full py-32 px-10 z-10" style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--section-border)', borderBottom: '1px solid var(--section-border)' }}>
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-12">
-              <h2 className="text-5xl font-bold leading-tight tracking-tight italic" style={{ color: 'var(--text-primary)' }}>AI, right where<br />you work.</h2>
-              <p className="text-lg font-medium leading-relaxed max-w-md" style={{ color: 'var(--text-tertiary)' }}>
+              <h2 className="text-5xl font-bold leading-tight tracking-tight italic" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>AI, right where<br />you work.</h2>
+              <p className="text-lg font-normal leading-relaxed max-w-md" style={{ color: 'var(--text-tertiary)', fontFamily: "'Inter', sans-serif" }}>
                 Access your entire AI stack by clicking keys without leaving the page you're working on. Pure efficiency, zero friction.
               </p>
               <ul className="space-y-6">

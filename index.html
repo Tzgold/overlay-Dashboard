@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlay AI — Precision Intelligence</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap"
         rel="stylesheet">
     <style>
         /* ===== THEME VARIABLES ===== */
@@ -90,13 +91,24 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-primary);
             color: var(--text-primary);
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Heading font */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         /* Border Glow Effect - Subdued */
@@ -162,6 +174,20 @@
             color: var(--text-tertiary);
             font-weight: 700;
             letter-spacing: 0.2em;
+        }
+
+        /* Section label — small uppercase with golden underline (like the image reference) */
+        .section-label {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            padding-bottom: 6px;
+            border-bottom: 2px solid #c9a84c;
+            margin-bottom: 20px;
         }
 
         /* Star Shower Animation */
