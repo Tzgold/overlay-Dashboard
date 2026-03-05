@@ -405,7 +405,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
             </h1>
 
             <p className="text-base md:text-xl max-w-2xl mx-auto mb-12 font-normal leading-relaxed" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
-              Unleash a high-performance command center on any website — instantly, with zero context switching.
+              Unleash a high-performance command center on any website, instantly, with zero context switching.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -441,7 +441,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   </div>
                   <div className="space-y-4 mt-auto">
                     <h3 className="card-title text-2xl">Install Extension</h3>
-                    <p className="card-body">Add Overlay to Chrome in under 60 seconds. No sign-up, no setup — just open the Chrome Web Store, click install, and you're set. Works instantly on any website you already visit.</p>
+                    <p className="card-body">Add Overlay to Chrome in under 60 seconds. No signup needed. Just open the Chrome Web Store, click install, and you're set. Works on any website you already visit.</p>
                   </div>
                 </div>
               </SpotlightCard>
@@ -453,7 +453,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   </div>
                   <div className="space-y-4 mt-auto">
                     <h3 className="card-title text-2xl">Summon Instantly</h3>
-                    <p className="card-body">Hit <kbd style={{ fontFamily: "'Inter', sans-serif", padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border-primary)', fontSize: '12px' }}>⌘/Ctrl + A</kbd> anywhere on the web to summon your full AI command center — no tab switching, no friction, no delay.</p>
+                    <p className="card-body">Hit <kbd style={{ fontFamily: "'Inter', sans-serif", padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border-primary)', fontSize: '12px' }}>⌘/Ctrl + A</kbd> anywhere on the web to summon your full AI command center. No tab switching, no friction, no delay.</p>
                   </div>
                 </div>
               </SpotlightCard>
@@ -467,7 +467,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 </div>
                 <div className="space-y-4">
                   <h3 className="card-title text-2xl">Universal Layer</h3>
-                  <p className="card-body max-w-[560px]">Overlay sits above every website as a persistent intelligence layer. Whether you're reading docs, browsing GitHub, or writing emails — the same powerful AI panel is always exactly one keystroke away.</p>
+                  <p className="card-body max-w-[560px]">Overlay sits above every website as a persistent intelligence layer. Whether you're reading docs, browsing GitHub, or writing emails, the same powerful AI panel is always exactly one keystroke away.</p>
                 </div>
               </div>
             </SpotlightCard>
@@ -491,7 +491,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   </div>
                   <div className="space-y-4 mt-auto">
                     <h3 className="card-title text-xl">Students</h3>
-                    <p className="card-body">Summarize a research paper while reading it, ask questions about lecture slides, and get instant explanations — all without opening a new tab or breaking your reading flow.</p>
+                    <p className="card-body">Summarize a research paper while reading it, ask questions about lecture slides, and get instant explanations. All without opening a new tab or breaking your reading flow.</p>
                   </div>
                 </div>
               </SpotlightCard>
@@ -503,7 +503,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   </div>
                   <div className="space-y-4 mt-auto">
                     <h3 className="card-title text-xl">Developers</h3>
-                    <p className="card-body">Debug, explain, or refactor any function directly on GitHub or docs — no copy-paste, no context loss, no alt-tab required.</p>
+                    <p className="card-body">Debug, explain, or refactor any function directly on GitHub or docs. No copy paste, no context loss, no extra tabs required.</p>
                   </div>
                 </div>
               </SpotlightCard>
@@ -518,7 +518,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   </div>
                   <div className="space-y-4 mt-auto">
                     <h3 className="card-title text-xl">Writers</h3>
-                    <p className="card-body">Draft replies, polish tone, and reshape paragraphs in real-time — directly on top of any editor, inbox, or content platform.</p>
+                    <p className="card-body">Draft replies, polish tone, and reshape paragraphs in real time. Directly on top of any editor, inbox, or content platform.</p>
                   </div>
                 </div>
               </SpotlightCard>
