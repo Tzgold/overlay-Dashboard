@@ -400,7 +400,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               Overlay Intelligence v3.0
             </div>
 
-            <h1 className="text-5xl md:text-7xl mb-8 max-w-4xl mx-auto leading-[1.1] font-bold tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
+            <h1 className="text-5xl md:text-7xl mb-8 max-w-4xl mx-auto leading-[1.1] font-bold tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.03em' }}>
               AI, right where<br />you work
             </h1>
 
@@ -433,34 +433,41 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           <div className="max-w-6xl mx-auto flex flex-col gap-6">
             {/* Top row: large left + small right */}
             <div className="grid md:grid-cols-5 gap-6">
-              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[280px]">
-                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <Download size={28} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Install Extension</h3>
-                  <p className="text-[15px] leading-relaxed max-w-[360px] font-medium" style={{ color: 'var(--text-tertiary)' }}>Add Overlay to Chrome in one click. Experience native integration deep in the browser.</p>
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[300px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-14 h-14 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <Download size={28} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-2xl">Install Extension</h3>
+                    <p className="card-body">Add Overlay to Chrome in under 60 seconds. No sign-up, no setup — just open the Chrome Web Store, click install, and you're set. Works instantly on any website you already visit.</p>
+                  </div>
                 </div>
               </SpotlightCard>
-              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[280px]">
-                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <Keyboard size={28} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Summon Instantly</h3>
-                  <p className="text-[15px] leading-relaxed font-medium" style={{ color: 'var(--text-tertiary)' }}>Press ⌘ / Ctrl + A to open anywhere. Bring the AI dashboard into any page without leaving your flow.</p>
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[300px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-14 h-14 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <Keyboard size={28} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-2xl">Summon Instantly</h3>
+                    <p className="card-body">Hit <kbd style={{ fontFamily: "'Inter', sans-serif", padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border-primary)', fontSize: '12px' }}>⌘/Ctrl + A</kbd> anywhere on the web to summon your full AI command center — no tab switching, no friction, no delay.</p>
+                  </div>
                 </div>
               </SpotlightCard>
             </div>
             {/* Bottom row: full width */}
             <SpotlightCard className="flex flex-col md:flex-row md:items-center justify-between p-10 min-h-[200px] gap-8">
-              <div className="flex items-start gap-6">
-                <div className="transition-all duration-500 flex items-center justify-center w-14 h-14 rounded-2xl shrink-0" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+              <div className="card-title-wrap flex items-start gap-6 w-full">
+                <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                <div className="card-icon flex items-center justify-center w-14 h-14 rounded-2xl shrink-0" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
                   <Layers size={28} />
                 </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Universal Layer</h3>
-                  <p className="text-[15px] leading-relaxed max-w-[480px] font-medium" style={{ color: 'var(--text-tertiary)' }}>Precision Intelligence. Without compromise. Use the dashboard on any page instantly.</p>
+                <div className="space-y-4">
+                  <h3 className="card-title text-2xl">Universal Layer</h3>
+                  <p className="card-body max-w-[560px]">Overlay sits above every website as a persistent intelligence layer. Whether you're reading docs, browsing GitHub, or writing emails — the same powerful AI panel is always exactly one keystroke away.</p>
                 </div>
               </div>
             </SpotlightCard>
@@ -476,43 +483,55 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           <div className="max-w-6xl mx-auto flex flex-col gap-6">
             {/* Top row: large left + small right */}
             <div className="grid md:grid-cols-5 gap-6">
-              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
-                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <GraduationCap size={24} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Students</h3>
-                  <p className="text-sm font-medium leading-relaxed max-w-[360px]" style={{ color: 'var(--text-tertiary)' }}>Summarize a PDF while reading it</p>
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-12 h-12 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <GraduationCap size={24} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-xl">Students</h3>
+                    <p className="card-body">Summarize a research paper while reading it, ask questions about lecture slides, and get instant explanations — all without opening a new tab or breaking your reading flow.</p>
+                  </div>
                 </div>
               </SpotlightCard>
-              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
-                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <Code2 size={24} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Developers</h3>
-                  <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>Explain a function without leaving GitHub</p>
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-12 h-12 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <Code2 size={24} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-xl">Developers</h3>
+                    <p className="card-body">Debug, explain, or refactor any function directly on GitHub or docs — no copy-paste, no context loss, no alt-tab required.</p>
+                  </div>
                 </div>
               </SpotlightCard>
             </div>
             {/* Bottom row: small left + large right */}
             <div className="grid md:grid-cols-5 gap-6">
-              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
-                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <PenTool size={24} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Writers</h3>
-                  <p className="text-sm font-medium leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>Draft an email reply while staying in your flow</p>
+              <SpotlightCard className="md:col-span-2 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-12 h-12 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <PenTool size={24} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-xl">Writers</h3>
+                    <p className="card-body">Draft replies, polish tone, and reshape paragraphs in real-time — directly on top of any editor, inbox, or content platform.</p>
+                  </div>
                 </div>
               </SpotlightCard>
-              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[260px] transition-all duration-500 hover:-translate-y-1">
-                <div className="transition-all duration-500 flex items-center justify-center w-12 h-12 rounded-2xl mb-6" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
-                  <Search size={24} />
-                </div>
-                <div className="space-y-3">
-                  <h3 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>Researchers</h3>
-                  <p className="text-sm font-medium leading-relaxed max-w-[360px]" style={{ color: 'var(--text-tertiary)' }}>Cross-reference facts while browsing live news</p>
+              <SpotlightCard className="md:col-span-3 flex flex-col justify-between p-10 min-h-[280px]">
+                <div className="card-title-wrap flex flex-col h-full">
+                  <div className="card-shimmer-wrap"><div className="card-shimmer-bar" /></div>
+                  <div className="card-icon flex items-center justify-center w-12 h-12 rounded-2xl mb-8" style={{ color: 'var(--text-tertiary)', backgroundColor: 'var(--bg-elevated)' }}>
+                    <Search size={24} />
+                  </div>
+                  <div className="space-y-4 mt-auto">
+                    <h3 className="card-title text-xl">Researchers</h3>
+                    <p className="card-body">Cross-reference claims against live sources, summarize long threads, and surface key insights from any page — in one keystroke, without losing your place.</p>
+                  </div>
                 </div>
               </SpotlightCard>
             </div>
@@ -523,11 +542,12 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         <section id="features" className="w-full py-32 px-10 z-10" style={{ backgroundColor: 'var(--bg-primary)', borderTop: '1px solid var(--section-border)', borderBottom: '1px solid var(--section-border)' }}>
           <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
             <div className="space-y-12">
-              <h2 className="text-5xl font-bold leading-tight tracking-tight italic" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif" }}>AI, right where<br />you work.</h2>
-              <p className="text-lg font-normal leading-relaxed max-w-md" style={{ color: 'var(--text-tertiary)', fontFamily: "'Inter', sans-serif" }}>
-                Access your entire AI stack by clicking keys without leaving the page you're working on. Pure efficiency, zero friction.
+              <span className="section-label">Features</span>
+              <h2 className="text-5xl font-bold leading-tight tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.03em' }}>AI, right where<br />you work.</h2>
+              <p className="text-base font-normal leading-relaxed max-w-md" style={{ color: 'var(--text-tertiary)', fontFamily: "'Inter', sans-serif" }}>
+                Access your entire AI stack without ever switching tabs. Pure efficiency, zero friction, built for the way you actually work.
               </p>
-              <ul className="space-y-6">
+              <ul className="space-y-5">
                 {[
                   "Context-aware AI command center",
                   "Direct HTML/DOM element parsing",
@@ -536,11 +556,11 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                   "Optimized keyboard-first navigation",
                   "Isolated secure sandbox compute"
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-5 font-bold text-sm group cursor-default" style={{ color: 'var(--text-secondary)' }}>
-                    <div className="w-6 h-6 flex items-center justify-center shrink-0 transition-all" style={{ border: '1px solid var(--border-primary)' }}>
-                      <div className="w-1 h-1 opacity-40 group-hover:opacity-100 transition-all" style={{ backgroundColor: 'var(--text-primary)' }} />
+                  <li key={i} className="flex items-center gap-4 text-sm group cursor-default" style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif" }}>
+                    <div className="w-5 h-5 flex items-center justify-center shrink-0 rounded transition-all duration-300 group-hover:scale-110" style={{ border: '1px solid var(--border-primary)', backgroundColor: 'var(--bg-elevated)' }}>
+                      <div className="w-1.5 h-1.5 rounded-full opacity-40 group-hover:opacity-100 transition-all duration-300" style={{ backgroundColor: '#c9a84c' }} />
                     </div>
-                    <span className="transition-all group-hover:translate-x-1 uppercase tracking-tight italic" style={{ color: 'var(--text-secondary)' }}>{item}</span>
+                    <span className="transition-all duration-300 group-hover:translate-x-1 tracking-wide" style={{ color: 'var(--text-secondary)' }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -556,7 +576,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 </div>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
-                    <span className="font-bold text-3xl tracking-tight italic" style={{ color: 'var(--text-primary)' }}>AI, right where you work</span>
+                    <span className="font-bold text-3xl tracking-tight" style={{ color: 'var(--text-primary)', fontFamily: "'Plus Jakarta Sans', sans-serif", letterSpacing: '-0.02em' }}>AI, right where you work</span>
                   </div>
                 </div>
               </div>

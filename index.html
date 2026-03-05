@@ -190,6 +190,88 @@
             margin-bottom: 20px;
         }
 
+        /* Card title — underline accent like section-label but inline */
+        .card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+
+        .card-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 32px;
+            height: 2px;
+            background: #c9a84c;
+            border-radius: 2px;
+            transition: width 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-title-wrap:hover .card-title::after,
+        .spotlight-card-hover .card-title::after {
+            width: 100%;
+        }
+
+        /* Card body text */
+        .card-body {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.7;
+            color: var(--text-tertiary);
+        }
+
+        /* Card icon wrapper hover */
+        .card-icon {
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .card-title-wrap:hover .card-icon {
+            transform: scale(1.18) rotate(-6deg);
+            background-color: rgba(201, 168, 76, 0.15) !important;
+            color: #c9a84c !important;
+        }
+
+        /* Shimmer sweep on card hover */
+        @keyframes card-shimmer {
+            0% {
+                transform: translateX(-120%) skewX(-15deg);
+            }
+
+            100% {
+                transform: translateX(220%) skewX(-15deg);
+            }
+        }
+
+        .card-shimmer-wrap {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            border-radius: inherit;
+            pointer-events: none;
+        }
+
+        .card-shimmer-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.06), transparent);
+            transform: translateX(-120%) skewX(-15deg);
+            transition: none;
+        }
+
+        .card-title-wrap:hover .card-shimmer-bar {
+            animation: card-shimmer 0.7s ease forwards;
+        }
+
         /* Star Shower Animation */
         @keyframes star-shower {
             0% {
