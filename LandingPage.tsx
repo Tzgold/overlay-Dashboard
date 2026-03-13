@@ -25,8 +25,7 @@ import {
   Moon
 } from 'lucide-react';
 
-// Using the overlay.png provided by the user
-const LOGO_PATH = "/overlay.png";
+import logoPath from './overlay.png';
 
 const BuyMeCoffee = () => {
   const [amount, setAmount] = useState('5.00');
@@ -361,7 +360,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
         <div className="w-full pt-10 flex justify-center sticky top-0 z-50 px-6">
           <nav className="glass-surface flex items-center gap-2 p-1.5 rounded-full shadow-2xl max-w-fit backdrop-blur-xl" style={{ backgroundColor: 'var(--bg-nav)' }}>
             <div className="w-10 h-10 rounded-full flex items-center justify-center overflow-hidden group p-1.5" style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-faint)' }}>
-              <img src={LOGO_PATH} alt="Overlay Logo" className="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity theme-logo" />
+              <img src={logoPath} alt="Overlay Logo" className="w-full h-full object-contain opacity-70 group-hover:opacity-100 transition-opacity theme-logo" />
             </div>
 
             <div className="hidden md:flex items-center gap-8 px-8">
@@ -571,7 +570,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 <div className="relative">
                   <div className="absolute inset-0 blur-[100px] rounded-full transition-all duration-700" style={{ backgroundColor: isDark ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.05)' }} />
                   <div className="w-32 h-32 opacity-20 group-hover:opacity-100 transition-all duration-1000 relative z-10 group-hover:scale-110 flex items-center justify-center">
-                    <img src={LOGO_PATH} alt="Overlay Logo" className="w-full h-full object-contain filter brightness-125 theme-logo" />
+                    <img src={logoPath} alt="Overlay Logo" className="w-full h-full object-contain filter brightness-125 theme-logo" />
                   </div>
                 </div>
                 <div className="space-y-4">
@@ -591,7 +590,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               <div className="col-span-2 space-y-8">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 flex items-center justify-center overflow-hidden">
-                    <img src={LOGO_PATH} alt="Overlay Logo" className="w-full h-full object-contain theme-logo" />
+                    <img src={logoPath} alt="Overlay Logo" className="w-full h-full object-contain theme-logo" />
                   </div>
                   <span className="text-2xl font-bold tracking-tight italic uppercase" style={{ color: 'var(--text-primary)' }}>Overlay</span>
                 </div>
