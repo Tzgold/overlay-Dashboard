@@ -27,6 +27,29 @@ import {
 
 import logoPath from './overlay.png';
 
+const SUPPORT_EMAIL = 'support@overlay-ai.app';
+const SUPPORT_SUBJECT = 'Overlay Support Request';
+const SUPPORT_BODY = `Hi Overlay team,
+
+I need help with:
+
+- What happened:
+- Steps I tried:
+- Browser + OS:
+
+Thanks.`;
+
+const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}?${new URLSearchParams({
+  subject: SUPPORT_SUBJECT,
+  body: SUPPORT_BODY,
+}).toString()}`;
+
+const SUPPORT_LINKS = {
+  email: SUPPORT_MAILTO,
+  issue: 'https://github.com/Tzgold/Overlay/issues/new/choose',
+  liveChat: 'https://t.me/T_zgold',
+};
+
 const BuyMeCoffee = () => {
   const [amount, setAmount] = useState('5.00');
   const [isExpanded, setIsExpanded] = useState(false);
@@ -322,6 +345,76 @@ const ThemeToggle = ({ isDark, onToggle }: { isDark: boolean; onToggle: () => vo
         </div>
       </div>
     </button>
+  );
+};
+
+const HelpWidget = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="fixed bottom-8 left-8 z-[100] flex flex-col items-start gap-3">
+      {isOpen ? (
+        <div
+          className="glass-surface p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.45)] w-[290px] animate-in fade-in zoom-in duration-300"
+          style={{ border: '1px solid var(--border-subtle)' }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: 'var(--text-secondary)' }}>
+              Need Help?
+            </p>
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded-lg transition-opacity hover:opacity-80"
+              style={{ color: 'var(--text-tertiary)', border: '1px solid var(--border-subtle)' }}
+              aria-label="Close support menu"
+            >
+              Close
+            </button>
+          </div>
+
+          <div className="space-y-2 text-[11px] font-bold uppercase tracking-[0.12em]">
+            <a
+              href={SUPPORT_LINKS.email}
+              className="block rounded-xl px-4 py-3 transition-opacity hover:opacity-85"
+              style={{ backgroundColor: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)' }}
+            >
+              Email Support
+            </a>
+            <a
+              href={SUPPORT_LINKS.issue}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl px-4 py-3 transition-opacity hover:opacity-85"
+              style={{ backgroundColor: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)' }}
+            >
+              Report an Issue
+            </a>
+            <a
+              href={SUPPORT_LINKS.liveChat}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-xl px-4 py-3 transition-opacity hover:opacity-85"
+              style={{ backgroundColor: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-subtle)' }}
+            >
+              Live Chat (Telegram)
+            </a>
+          </div>
+        </div>
+      ) : (
+        <button
+          onClick={() => setIsOpen(true)}
+          className="px-5 py-3 rounded-2xl text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-300 hover:scale-105 active:scale-95 shadow-[0_12px_35px_rgba(0,0,0,0.45)]"
+          style={{
+            backgroundColor: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--border-subtle)',
+          }}
+          aria-label="Open support menu"
+        >
+          Need Help?
+        </button>
+      )}
+    </div>
   );
 };
 
@@ -628,9 +721,34 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
               <div className="space-y-6">
                 <h4 className="text-[11px] font-bold uppercase tracking-widest" style={{ color: 'var(--text-secondary)' }}>Support</h4>
                 <ul className="space-y-4 text-[11px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>
-                  <li><a href="#" className="hover:opacity-100 transition-opacity">Docs</a></li>
-                  <li><a href="#" className="hover:opacity-100 transition-opacity">Guides</a></li>
-                  <li><a href="#" className="hover:opacity-100 transition-opacity">API</a></li>
+                  <li>
+                    <a
+                      href={SUPPORT_LINKS.email}
+                      className="hover:opacity-100 transition-opacity"
+                    >
+                      Contact Support
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={SUPPORT_LINKS.issue}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-100 transition-opacity"
+                    >
+                      Report Issue
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={SUPPORT_LINKS.liveChat}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-100 transition-opacity"
+                    >
+                      Live Chat
+                    </a>
+                  </li>
                 </ul>
               </div>
 
@@ -663,6 +781,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
           </div>
         </footer>
       </div>
+      <HelpWidget />
       <BuyMeCoffee />
     </div>
   );
