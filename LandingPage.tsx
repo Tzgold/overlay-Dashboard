@@ -757,7 +757,7 @@ const LandingPage: React.FC<{ onOpenDashboard: () => void }> = ({ onOpenDashboar
                 <ul className="space-y-4 text-[11px] uppercase font-bold" style={{ color: 'var(--text-tertiary)' }}>
                   <li><a href="#" className="hover:opacity-100 transition-opacity">About</a></li>
                   <li><a href="#" className="hover:opacity-100 transition-opacity">Blog</a></li>
-                  <li><a href="#" className="hover:opacity-100 transition-opacity">Legal</a></li>
+                  <li><a href="/privacy.html" className="hover:opacity-100 transition-opacity">Privacy Policy</a></li>
                 </ul>
               </div>
 
