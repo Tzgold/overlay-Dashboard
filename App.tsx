@@ -3,11 +3,15 @@ import React from 'react';
 import LandingPage from './LandingPage';
 
 const App: React.FC = () => {
+  const EXTENSION_STORE_URL =
+    'https://chromewebstore.google.com/detail/overlay/likfohkcaackgiflbljodnahpocbfgka';
+
   const handleGetExtension = () => {
     // This function is triggered by the "Get Extension" buttons on the landing page.
-    // Since you have your own extension, you can replace this with a link to your store page.
-    console.log("Redirecting to extension store...");
-    window.open('https://chrome.google.com/webstore', '_blank');
+    // Redirect directly to your Chrome Web Store listing.
+    const w = window.open(EXTENSION_STORE_URL, '_blank', 'noopener,noreferrer');
+    // If a popup blocker stops the new tab, fall back to navigating the current tab.
+    if (!w) window.location.href = EXTENSION_STORE_URL;
   };
 
   return (
