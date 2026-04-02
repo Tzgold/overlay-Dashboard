@@ -1,5 +1,5 @@
 
-# Nova AI — Extension & Landing Page
+# Overlay Extension  Landing Page
 
 A lightweight React + Vite landing site and Chrome extension scaffold that demonstrates an in-page AI command center using a Shadow DOM for style isolation.
 
