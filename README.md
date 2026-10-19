@@ -4,13 +4,6 @@ Public marketing site for **Overlay**, a Chrome extension that opens your chosen
 
 **Live site:** [overlay-extension.vercel.app](https://overlay-extension.vercel.app/)  
 **Chrome Web Store:** [Overlay](https://chromewebstore.google.com/detail/overlay/likfohkcaackgiflbljodnahpocbfgka)
-
-## Tech stack
-
-- **React 19** + **TypeScript**
-- **Vite 6** for dev and production builds
-- **Tailwind CSS** for styling
-
 ## What’s in this repo
 
 | Path | Purpose |
